@@ -10,7 +10,7 @@ The `local` variable on `Globals.tscn` is a global variable used to determine wh
   
 ## Local Models (Ollama)
 
-If you'd like to run language models locally during the workshop - install Ollama (https://ollama.com/) and run `ollama run gemma3:1b` ahead of the workshop. This will pull a <1GB model file to your local computer and 
+If you'd like to run language models locally during the workshop - install Ollama (https://ollama.com/) and run `ollama run gemma3:1b` ahead of the workshop. This will pull a <1GB model file to your local computer and let Ollama serve that model locally.
 This should consume less than one GB of VRAM, but laptops without a dedicated graphics card are likely to struggle. Tested on Pop!_OS with a Nvidia 3060 and a laptop with a 2060.
 
 ## Remote Models (OpenRouter) API Key Setup
