@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://utils/Globals.gd"
+Globals="*res://Part 0 - Setup and Mic Check/Globals.gd"
 
 [input]
 

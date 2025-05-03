@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cppma52pxwl7m"]
 
-[ext_resource type="Shader" uid="uid://km1mhstuyvwi" path="res://Part 2 - Shader Control/Planet/PlanetShader.gdshader" id="1_gjmba"]
+[ext_resource type="Shader" uid="uid://km1mhstuyvwi" path="res://Part 1 - Shader Control/Planet/PlanetShader.gdshader" id="1_gjmba"]
 [ext_resource type="Texture2D" uid="uid://ckkugpdl60r6y" path="res://icon.svg" id="2_v0aem"]
-[ext_resource type="Script" uid="uid://cldti2nsa8j6r" path="res://Part 2 - Shader Control/Planet/planet_view.gd" id="3_h3wq1"]
-[ext_resource type="Resource" uid="uid://hhvsqiuvoet1" path="res://Part 2 - Shader Control/Planet/Planets/UndiscoveredPlanet.tres" id="4_x8r8f"]
+[ext_resource type="Script" uid="uid://cldti2nsa8j6r" path="res://Part 1 - Shader Control/Planet/planet_view.gd" id="3_h3wq1"]
+[ext_resource type="Resource" uid="uid://hhvsqiuvoet1" path="res://Part 1 - Shader Control/Planet/Planets/UndiscoveredPlanet.tres" id="4_x8r8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v0aem"]
 shader = ExtResource("1_gjmba")

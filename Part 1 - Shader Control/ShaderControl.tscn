@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfeq4aoa6ehb0"]
+[gd_scene load_steps=8 format=3 uid="uid://dsvqp6sa183hq"]
 
-[ext_resource type="Script" uid="uid://vm4ij62vg7cr" path="res://Part 2a - Shader Control Local/shader_control.gd" id="1_xrm6p"]
-[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="2_ekgp6"]
-[ext_resource type="Script" uid="uid://c3711emyqdkm6" path="res://utils/local_language_model_connection.gd" id="2_juv3v"]
-[ext_resource type="PackedScene" uid="uid://cppma52pxwl7m" path="res://Part 2 - Shader Control/Planet/PlanetView.tscn" id="6_avyyt"]
+[ext_resource type="Script" uid="uid://elwtx2r5g56" path="res://Part 1 - Shader Control/shader_control.gd" id="1_jjgjq"]
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 1 - Shader Control/Planet/Planet.gd" id="2_vtfsf"]
+[ext_resource type="Resource" uid="uid://bwgefbkybvtv" path="res://Part 1 - Shader Control/Planet/Planets/The Rock.tres" id="3_axpmj"]
+[ext_resource type="Resource" uid="uid://e7jwjwxjmth5" path="res://Part 1 - Shader Control/Planet/Planets/Cadbury.tres" id="4_6rgby"]
+[ext_resource type="PackedScene" uid="uid://cppma52pxwl7m" path="res://Part 1 - Shader Control/Planet/PlanetView.tscn" id="6_1gufx"]
+[ext_resource type="PackedScene" uid="uid://brb4qolpn34o8" path="res://utils/LanguageModelAdapter.tscn" id="6_ogb17"]
 
-[sub_resource type="Resource" id="Resource_juv3v"]
-script = ExtResource("2_ekgp6")
+[sub_resource type="Resource" id="Resource_6bfob"]
+script = ExtResource("2_vtfsf")
 planet_name = ""
 planet_overview = ""
 population = 0
@@ -25,13 +27,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xrm6p")
-generation_target = SubResource("Resource_juv3v")
-
-[node name="LanguageModelConnection" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_juv3v")
-metadata/_custom_type_script = "uid://c3711emyqdkm6"
+script = ExtResource("1_jjgjq")
+planet_cache = Array[ExtResource("2_vtfsf")]([ExtResource("3_axpmj"), ExtResource("4_6rgby")])
+generation_target = SubResource("Resource_6bfob")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -61,7 +59,7 @@ handle_input_locally = false
 size = Vector2i(400, 300)
 render_target_update_mode = 4
 
-[node name="PlanetView" parent="VBoxContainer2/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_avyyt")]
+[node name="PlanetView" parent="VBoxContainer2/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_1gufx")]
 unique_name_in_owner = true
 position = Vector2(216, 146)
 scale = Vector2(1.99219, 2.08594)
@@ -103,6 +101,9 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Random Warp"
 
-[connection signal="request_completed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_completed"]
-[connection signal="request_failed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_failed"]
+[node name="LanguageModelAdapter" parent="." instance=ExtResource("6_ogb17")]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="RandomWarp" to="." method="_on_random_warp_pressed"]
+[connection signal="request_completed" from="LanguageModelAdapter" to="." method="_on_language_model_adapter_request_completed"]
+[connection signal="request_failed" from="LanguageModelAdapter" to="." method="_on_language_model_adapter_request_failed"]

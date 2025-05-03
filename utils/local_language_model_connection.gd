@@ -234,8 +234,8 @@ static func extract_json(text: String):
 		if json_result != null:
 			return json_result
 	
-	return LanguageModelConnection.extract_json(text)
+	return OpenRouterModelConnection.extract_json(text)
 
 # Parse LLM response similar to LanguageModelConnection
 static func parse_llm_response(response_text: String) -> String:
-	return LanguageModelConnection.parse_llm_response(response_text) 
+	return OpenRouterModelConnection.parse_llm_response(response_text) 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://beg0441w45i42"]
 
-[ext_resource type="Script" uid="uid://dqkd7jwuj32iv" path="res://Part 0 - Mic Check/mic_check.gd" id="1_351em"]
-[ext_resource type="Script" uid="uid://dfewrwmf1q7q7" path="res://utils/language_model_connection.gd" id="2_71jfy"]
+[ext_resource type="Script" uid="uid://dqkd7jwuj32iv" path="res://Part 0 - Setup and Mic Check/local_check.gd" id="1_px822"]
+[ext_resource type="PackedScene" uid="uid://brb4qolpn34o8" path="res://utils/LanguageModelAdapter.tscn" id="3_sbl27"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_351em"]
 font_size = 32
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_351em")
+script = ExtResource("1_px822")
 
 [node name="Loading" type="Label" parent="."]
 layout_mode = 2
@@ -22,10 +22,7 @@ offset_right = 1.0
 offset_bottom = 31.0
 text = "Loading"
 
-[node name="LanguageModelConnection" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_71jfy")
-metadata/_custom_type_script = "uid://dfewrwmf1q7q7"
+[node name="ConnectionManager" parent="." instance=ExtResource("3_sbl27")]
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -44,6 +41,6 @@ autowrap_mode = 3
 wait_time = 5.0
 autostart = true
 
-[connection signal="request_completed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_completed"]
-[connection signal="request_failed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_failed"]
+[connection signal="request_completed" from="ConnectionManager" to="." method="_on_connection_manager_request_completed"]
+[connection signal="request_failed" from="ConnectionManager" to="." method="_on_connection_manager_request_failed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

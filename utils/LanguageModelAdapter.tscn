@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://brb4qolpn34o8"]
 
-[ext_resource type="Script" uid="uid://c3xrif5a81ydg" path="res://utils/connection.gd" id="1_6xf1c"]
-[ext_resource type="PackedScene" uid="uid://cooulyuwrp8nc" path="res://utils/language_model_connection.tscn" id="2_apj8c"]
+[ext_resource type="Script" uid="uid://c3xrif5a81ydg" path="res://utils/language_model_adapter.gd" id="1_6xf1c"]
+[ext_resource type="PackedScene" uid="uid://cooulyuwrp8nc" path="res://utils/open_router_model_connection.tscn" id="2_apj8c"]
 [ext_resource type="PackedScene" uid="uid://bemhpbxym7xvl" path="res://utils/local_language_model_connection.tscn" id="3_ml3oi"]
 
-[node name="ConnectionManager" type="Node"]
+[node name="LanguageModelAdapter" type="Node"]
 script = ExtResource("1_6xf1c")
 
 [node name="RemoteLanguageModelConnection" parent="." instance=ExtResource("2_apj8c")]

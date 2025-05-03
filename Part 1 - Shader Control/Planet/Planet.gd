@@ -33,6 +33,14 @@ static func get_planet_schema() -> Dictionary:
 func to_json() -> Dictionary:
 	return SchemaGenerator.json_dict(self)
 
+func to_summary() -> String:
+	var p_sum = "Planet Name: " + planet_name + "\n"
+	p_sum += planet_overview
+	p_sum += "\n"
+	p_sum += (str(technology_level) + "/5 \n")
+	p_sum += (str(resource_richness) + "/10 \n") 
+	return p_sum
+
 # Creates a Planet instance from JSON data that matches the schema
 static func from_json(json_data) -> Planet:
 	var default_values = {

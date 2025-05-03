@@ -1,5 +1,5 @@
 extends Node
-class_name LanguageModelConnection
+class_name OpenRouterModelConnection
 
 signal request_completed(response, request_id)
 signal request_failed(error, request_id)
@@ -12,7 +12,9 @@ var active_requests = {}
 var request_counter = 0
 
 func _ready():
-	assert(len(api_key) > 0)
+	if not Globals.local:
+		print("Remote mode: API key length: ", len(api_key))
+		assert(len(api_key) > 0)
 
 # Create a new HTTP request with proper headers
 func _create_request(timeout : float = 30.0) -> HTTPRequest:
@@ -27,47 +29,66 @@ func _configure_headers() -> PackedStringArray:
 		"Content-Type: application/json",
 		"Authorization: Bearer " + api_key
 	])
+	print("Headers configured with auth token length: ", len(api_key))
 	return headers
 
 func generate(language_model_request : LanguageModelRequest):
 	var request_id = request_counter
 	request_counter += 1
 	
+	print("Generating with remote connection, request ID: ", request_id)
+	
 	var http_request = _create_request()
 	http_request.request_completed.connect(_on_request_completed.bind(request_id))
 	active_requests[request_id] = http_request
 	
 	var body = language_model_request.as_json_string()
+	print("Request body prepared: ", body.substr(0, 100) + "...")
 	
 	var headers = _configure_headers()
-	var error = http_request.request(API_BASE_URL + "/chat/completions", headers, HTTPClient.METHOD_POST, body)
+	var url = API_BASE_URL + "/chat/completions"
+	print("Sending request to URL: ", url)
+	
+	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, body)
 	
 	if error != OK:
+		print("HTTP request error code: ", error)
 		active_requests.erase(request_id)
 		emit_signal("request_failed", "Failed to make request: " + str(error), request_id)
 		return -1
 		
+	print("Request sent successfully with ID: ", request_id)
 	return request_id
 
 # Handle completed requests
 func _on_request_completed(result, response_code, headers, body, request_id):
+	print("Request completed callback - Result: ", result, ", Response code: ", response_code, ", Request ID: ", request_id)
+	
 	var http_request = active_requests[request_id]
 	active_requests.erase(request_id)
 	http_request.queue_free()
 	
 	if result != HTTPRequest.RESULT_SUCCESS:
+		print("Request failed with result code: ", result)
 		emit_signal("request_failed", "Request failed with code: " + str(result), request_id)
 		return
 		
 	if response_code != 200:
-		emit_signal("request_failed", "API returned error code: " + str(response_code) + " with body: " + body.get_string_from_utf8(), request_id)
+		var error_body = body.get_string_from_utf8()
+		print("API error with code ", response_code, ": ", error_body)
+		emit_signal("request_failed", "API returned error code: " + str(response_code) + " with body: " + error_body, request_id)
 		return
 		
-	var json = JSON.parse_string(body.get_string_from_utf8())
+	var response_text = body.get_string_from_utf8()
+	print("Response received: ", response_text.substr(0, 100) + "...")
+	
+	var json = JSON.parse_string(response_text)
 	if json == null:
+		print("Failed to parse JSON response: ", response_text.substr(0, 100) + "...")
 		emit_signal("request_failed", "Failed to parse JSON response", request_id)
 		return
 		
+	print("Emitting request_completed signal with valid JSON")
 	emit_signal("request_completed", json, request_id)
 
 # Helper function to create a message object

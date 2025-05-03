@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Planet" load_steps=2 format=3 uid="uid://bwgefbkybvtv"]
 
-[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="1_5kkkj"]
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 1 - Shader Control/Planet/Planet.gd" id="1_5kkkj"]
 
 [resource]
 script = ExtResource("1_5kkkj")
