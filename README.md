@@ -1,10 +1,11 @@
 # Markov Chain with a Shotgun
 ## GodotCon Boston 2025 Workshop Scaffolding
 
-This repo contains some scaffolding for a GodotCon workshop on how to reliably use small and open language models as components in larger procedural generation pipelines and game systems.
+This repo contains scaffolding for a GodotCon Boston workshop on how to reliably use small and open language models as components in larger procedural generation pipelines and game systems.
 
 ## Setup
-Running open-weight models locally can be tricky - so even though the workshop focuses on models that can be run on a normal gaming computer, there is some network scaffolding that wraps both Ollama (local) and OpenRouter (remote). Time permitting we can get into the gory details of these wrappers, but the focus of the workshop is going to on getting juice out of the models once they are loaded.
+Running open-weight models locally can be tricky - so even though the workshop focuses on models that can be run on a normal gaming computer, there is some network scaffolding that wraps both Ollama (local) and OpenRouter (remote). Time permitting we can get into the gory details of these wrappers, but the focus of the workshop is on getting juice out of these systems once superficial integration is complete.
+
 The `local` variable on `Globals.tscn` is a global variable used to determine whether requests are kept local or sent to OpenRouter.
   
 ## Local Models (Ollama)
@@ -14,10 +15,6 @@ This should consume less than one GB of VRAM, but laptops without a dedicated gr
 
 ## Remote Models (OpenRouter) API Key Setup
 
-An OpenRouter API key will be provided during the workshop. You can also sign up for an account and access free tier models without entering any billing information.
+An OpenRouter API key will be provided during the workshop. You can also sign up for an account and access free tier models without entering any billing information. After getting the API key in the workshop:
 1. Create a file named `api_key.txt` in the `utils/` directory
 2. Paste your API key in this file without any additional text or whitespace
-3. The file should look like this:
-   ```
-   your-api-key-here
-   ```
