@@ -6,7 +6,7 @@ const _TYPE_MAP := {
 	TYPE_STRING:  "string",
 	TYPE_INT:     "integer",
 	TYPE_FLOAT:   "number",
-	TYPE_COLOR:   "string", # emitted as hex strings
+	TYPE_COLOR:   "string",
 }
 
 static func _is_editor_prop(prop: Dictionary) -> bool:
@@ -84,13 +84,64 @@ static func _remove_comments_from_json(json_str: String) -> String:
 	
 	return "\n".join(result)
 
+# Extract the first complete JSON object from a string
+static func _extract_first_json_object(text: String) -> Dictionary:
+	# First try direct parsing - maybe it's already valid JSON
+	var direct_parse = JSON.parse_string(text)
+	if direct_parse != null and typeof(direct_parse) == TYPE_DICTIONARY:
+		return direct_parse
+		
+	# If the text starts with { and contains a }, try to extract just the first JSON object
+	if text.begins_with("{") and "}" in text:
+		var nesting_level = 0
+		var in_string = false
+		var escape_next = false
+		var end_pos = -1
+		
+		for i in range(text.length()):
+			var char = text[i]
+			
+			if escape_next:
+				escape_next = false
+			elif char == '\\':
+				escape_next = true
+			elif char == '"' and not escape_next:
+				in_string = not in_string
+			elif not in_string:
+				if char == '{':
+					nesting_level += 1
+				elif char == '}':
+					nesting_level -= 1
+					if nesting_level == 0:
+						end_pos = i
+						break
+			
+		if end_pos > 0:
+			var json_text = text.substr(0, end_pos + 1)
+			var result = JSON.parse_string(json_text)
+			if result != null and typeof(result) == TYPE_DICTIONARY:
+				return result
+	
+	# If we got here, we couldn't extract a valid JSON object
+	return {}
+
 # Parse JSON data with comment removal
 static func parse_json(json_data) -> Dictionary:
 	var parsed_json_data = json_data
 	
 	# Handle different input types
 	if typeof(json_data) == TYPE_STRING:
-		# Remove comments from JSON string before parsing
+		# First try to extract the first complete JSON object from the string
+		var first_json = _extract_first_json_object(json_data)
+		if not first_json.is_empty():
+			return first_json
+			
+		# If that fails, try normal extraction
+		var extracted = OpenRouterModelConnection.extract_json(json_data)
+		if extracted != null:
+			return extracted
+			
+		# If that fails, try the regular parsing approach
 		print("RESPONSE")
 		print(json_data)
 		var cleaned_json = _remove_comments_from_json(json_data)
@@ -109,6 +160,16 @@ static func parse_json(json_data) -> Dictionary:
 		if parsed_json_data.has("choices") and parsed_json_data.choices.size() > 0:
 			var content = parsed_json_data.choices[0].message.content
 			
+			# First try to extract the first JSON object from the content
+			var first_json = _extract_first_json_object(content)
+			if not first_json.is_empty():
+				return first_json
+				
+			# If that fails, try regular extraction
+			var extracted = OpenRouterModelConnection.extract_json(content)
+			if extracted != null:
+				return extracted
+				
 			# Remove comments before parsing
 			content = _remove_comments_from_json(content)
 			

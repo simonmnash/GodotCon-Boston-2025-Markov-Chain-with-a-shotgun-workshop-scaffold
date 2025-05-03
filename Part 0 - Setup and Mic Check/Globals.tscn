@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://u8iwvaq7ulxj"]
+
+[ext_resource type="Script" uid="uid://dm1kthvy8uqkr" path="res://Part 0 - Setup and Mic Check/Globals.gd" id="1_b3fsx"]
+
+[node name="Globals" type="Node"]
+script = ExtResource("1_b3fsx")
+local = true

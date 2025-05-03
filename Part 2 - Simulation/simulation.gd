@@ -25,10 +25,10 @@ func time_lapse(years : int):
 	if not loading:
 		loading = true
 		var r = %TimeStepper.create_request()
-		r.add_context('You are simulating the history of a planet. You should almost never change the technology level or resource richness.')
-		r.add_context('Your output should be an instance of a JSON object following the schema below')
-		r.add_context(JSON.stringify(time_lapse_target.get_time_lapse_schema()))
 		r.add_context(planet_cache[-1].to_summary())
+		r.add_context('You are simulating the history of a planet. Be very curt in your descriptions. No more than a sentance or two.')
+		r.add_context('Your output should be an instance of a JSON object following the schema below. Return only a valid JSON object.')
+		r.add_context(JSON.stringify(time_lapse_target.get_time_lapse_schema()))
 		r.add_context('Simulate a ' + str(years) + ' year period of history of the planet named' + planet_cache[-1].planet_name + ".", "user")
 		r.temperature = 0.4
 		r.response_format = time_lapse_target.get_time_lapse_schema()

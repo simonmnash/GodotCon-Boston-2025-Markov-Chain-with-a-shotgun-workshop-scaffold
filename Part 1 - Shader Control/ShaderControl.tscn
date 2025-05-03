@@ -20,7 +20,7 @@ cloud_color = Color(0, 0, 0, 1)
 primary_secondary_balance = 0.0
 metadata/_custom_type_script = "uid://bbx74ewv1fq14"
 
-[node name="RequestStructure" type="Control"]
+[node name="ShaderControl" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,10 +33,10 @@ generation_target = SubResource("Resource_6bfob")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 251.0
-offset_top = 181.0
-offset_right = 955.0
-offset_bottom = 527.0
+offset_left = 19.0
+offset_top = 38.0
+offset_right = 1107.0
+offset_bottom = 535.0
 
 [node name="Name" type="Label" parent="VBoxContainer2"]
 unique_name_in_owner = true
@@ -72,7 +72,7 @@ alignment = 2
 [node name="Description" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = true
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 6

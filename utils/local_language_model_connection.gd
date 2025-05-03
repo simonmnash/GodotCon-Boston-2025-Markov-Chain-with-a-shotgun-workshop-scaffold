@@ -68,20 +68,8 @@ func _prepare_ollama_request_body(language_model_request : LanguageModelRequest)
 		
 		# Add format if specified
 		if language_model_request.response_format != null:
-			# Handle different format specifications between APIs
-			if typeof(language_model_request.response_format) == TYPE_DICTIONARY:
-				if language_model_request.response_format.has("type") and language_model_request.response_format.get("type") == "json_object":
-					# OpenRouter JSON mode maps to Ollama's simple "json" format
-					body["format"] = "json"
-				elif language_model_request.response_format.has("type") and language_model_request.response_format.get("type") == "json_schema":
-					# OpenRouter JSON schema mode maps to Ollama's format object with schema
-					body["format"] = language_model_request.response_format.get("schema", {})
-				else:
-					# Pass the format as is for custom schemas
-					body["format"] = language_model_request.response_format
-			else:
-				# Direct format assignment (like "json")
-				body["format"] = language_model_request.response_format
+			# For Ollama, format must be the schema object directly, not wrapped
+			body["format"] = language_model_request.response_format
 		
 		# Add tools if specified
 		if language_model_request.tools.size() > 0:
@@ -105,20 +93,8 @@ func _prepare_ollama_request_body(language_model_request : LanguageModelRequest)
 		
 		# Add format if specified
 		if language_model_request.response_format != null:
-			# Handle different format specifications between APIs
-			if typeof(language_model_request.response_format) == TYPE_DICTIONARY:
-				if language_model_request.response_format.has("type") and language_model_request.response_format.get("type") == "json_object":
-					# OpenRouter JSON mode maps to Ollama's simple "json" format
-					body["format"] = "json"
-				elif language_model_request.response_format.has("type") and language_model_request.response_format.get("type") == "json_schema":
-					# OpenRouter JSON schema mode maps to Ollama's format object with schema
-					body["format"] = language_model_request.response_format.get("schema", {})
-				else:
-					# Pass the format as is for custom schemas
-					body["format"] = language_model_request.response_format
-			else:
-				# Direct format assignment (like "json")
-				body["format"] = language_model_request.response_format
+			# For Ollama, format must be the schema object directly, not wrapped
+			body["format"] = language_model_request.response_format
 			
 		return JSON.stringify(body)
 

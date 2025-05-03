@@ -87,7 +87,7 @@ func _on_request_completed(result, response_code, headers, body, request_id):
 		print("Failed to parse JSON response: ", response_text.substr(0, 100) + "...")
 		emit_signal("request_failed", "Failed to parse JSON response", request_id)
 		return
-		
+	print(response_text)
 	print("Emitting request_completed signal with valid JSON")
 	emit_signal("request_completed", json, request_id)
 

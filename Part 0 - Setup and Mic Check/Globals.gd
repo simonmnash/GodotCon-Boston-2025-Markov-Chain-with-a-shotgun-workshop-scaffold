@@ -2,7 +2,7 @@ extends Node
 
 # Workshop Note : Don't do this in production - keep your API key on a server.
 var api_key : String = ""
-@export var local : bool = true
+@export var local : bool = false
 
 func _ready():
 	if not local:
