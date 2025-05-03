@@ -1,4 +1,4 @@
-# Markov Chain with a Shotgun - GodotCon Boston 2025
+# Markov Chain with a Shotgun
 ## GodotCon Boston 2025 Workshop Scaffolding
 
 This repo contains some scaffolding for a GodotCon workshop on how to reliably use small and open language models as components in larger procedural generation pipelines and game systems.
