@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://cppma52pxwl7m"]
+
+[ext_resource type="Shader" uid="uid://km1mhstuyvwi" path="res://Part 2 - Shader Control/Planet/PlanetShader.gdshader" id="1_gjmba"]
+[ext_resource type="Texture2D" uid="uid://ckkugpdl60r6y" path="res://icon.svg" id="2_v0aem"]
+[ext_resource type="Script" uid="uid://cldti2nsa8j6r" path="res://Part 2 - Shader Control/Planet/planet_view.gd" id="3_h3wq1"]
+[ext_resource type="Resource" uid="uid://hhvsqiuvoet1" path="res://Part 2 - Shader Control/Planet/Planets/UndiscoveredPlanet.tres" id="4_x8r8f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0aem"]
+shader = ExtResource("1_gjmba")
+shader_parameter/primary_color = Color(0.2, 0.4, 0.8, 1)
+shader_parameter/secondary_color = Color(0, 0.580392, 0.635294, 1)
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/pixel_size = 13
+shader_parameter/seed = 15.456
+shader_parameter/primary_bias = 0.517
+
+[node name="PlanetView" type="Sprite2D"]
+material = SubResource("ShaderMaterial_v0aem")
+texture = ExtResource("2_v0aem")
+script = ExtResource("3_h3wq1")
+planet_data = ExtResource("4_x8r8f")

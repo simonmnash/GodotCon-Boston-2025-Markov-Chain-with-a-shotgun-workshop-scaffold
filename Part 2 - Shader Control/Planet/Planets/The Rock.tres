@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Planet" load_steps=2 format=3 uid="uid://bwgefbkybvtv"]
+
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="1_5kkkj"]
+
+[resource]
+script = ExtResource("1_5kkkj")
+planet_name = "The Rock"
+planet_overview = "A desolate fragment mining outpost. Abandoned long ago."
+population = 0
+technology_level = 0
+resource_richness = 0
+primary_color = Color(0.411646, 0.297649, 0.218932, 1)
+secondary_color = Color(0.619608, 0.4, 0, 1)
+cloud_color = Color(0.372549, 0, 0, 1)
+primary_secondary_balance = 0.0
+metadata/_custom_type_script = "uid://bbx74ewv1fq14"

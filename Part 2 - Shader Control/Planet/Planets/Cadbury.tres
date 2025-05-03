@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Planet" load_steps=2 format=3 uid="uid://e7jwjwxjmth5"]
+
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="1_x2ncw"]
+
+[resource]
+script = ExtResource("1_x2ncw")
+planet_name = "Crucible"
+planet_overview = "The moon of crucible is the nexus of commerce for spacefaring humans. It is a small planet - and produces little, but the towering cities and winding streets are a sight to see."
+population = 9000
+technology_level = 1
+resource_richness = 2
+primary_color = Color(0.395883, 0.213128, 0.367393, 1)
+secondary_color = Color(0.108113, 0.1534, 0.162017, 1)
+cloud_color = Color(1, 0.701961, 1, 1)
+primary_secondary_balance = 0.75
+metadata/_custom_type_script = "uid://bbx74ewv1fq14"

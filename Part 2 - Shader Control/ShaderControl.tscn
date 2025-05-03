@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsvqp6sa183hq"]
+
+[ext_resource type="Script" uid="uid://elwtx2r5g56" path="res://Part 2 - Shader Control/shader_control.gd" id="1_jjgjq"]
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="2_vtfsf"]
+[ext_resource type="Resource" uid="uid://bwgefbkybvtv" path="res://Part 2 - Shader Control/Planet/Planets/The Rock.tres" id="3_axpmj"]
+[ext_resource type="Resource" uid="uid://e7jwjwxjmth5" path="res://Part 2 - Shader Control/Planet/Planets/Cadbury.tres" id="4_6rgby"]
+[ext_resource type="Script" uid="uid://dfewrwmf1q7q7" path="res://utils/language_model_connection.gd" id="5_hswum"]
+[ext_resource type="PackedScene" uid="uid://cppma52pxwl7m" path="res://Part 2 - Shader Control/Planet/PlanetView.tscn" id="6_1gufx"]
+
+[sub_resource type="Resource" id="Resource_6bfob"]
+script = ExtResource("2_vtfsf")
+planet_name = ""
+planet_overview = ""
+population = 0
+technology_level = 0
+resource_richness = 0
+primary_color = Color(0, 0, 0, 1)
+secondary_color = Color(0, 0, 0, 1)
+cloud_color = Color(0, 0, 0, 1)
+primary_secondary_balance = 0.0
+metadata/_custom_type_script = "uid://bbx74ewv1fq14"
+
+[node name="RequestStructure" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jjgjq")
+planet_cache = Array[ExtResource("2_vtfsf")]([ExtResource("3_axpmj"), ExtResource("4_6rgby")])
+generation_target = SubResource("Resource_6bfob")
+
+[node name="LanguageModelConnection" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_hswum")
+metadata/_custom_type_script = "uid://dfewrwmf1q7q7"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 251.0
+offset_top = 181.0
+offset_right = 955.0
+offset_bottom = 527.0
+
+[node name="Name" type="Label" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "??????"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer2/HBoxContainer/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 300)
+render_target_update_mode = 4
+
+[node name="PlanetView" parent="VBoxContainer2/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("6_1gufx")]
+unique_name_in_owner = true
+position = Vector2(216, 146)
+scale = Vector2(1.99219, 2.08594)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="Description" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "...................................................................................................................................................................................."
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Population" type="Label" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Population: ?????"
+horizontal_alignment = 1
+
+[node name="RandomWarp" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -185.0
+offset_top = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Random Warp"
+
+[connection signal="request_completed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_completed"]
+[connection signal="request_failed" from="LanguageModelConnection" to="." method="_on_language_model_connection_request_failed"]
+[connection signal="pressed" from="RandomWarp" to="." method="_on_random_warp_pressed"]

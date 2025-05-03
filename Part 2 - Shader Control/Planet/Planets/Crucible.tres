@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Planet" load_steps=2 format=3 uid="uid://14d8e53083jw"]
+
+[ext_resource type="Script" uid="uid://bbx74ewv1fq14" path="res://Part 2 - Shader Control/Planet/Planet.gd" id="1_2py68"]
+
+[resource]
+script = ExtResource("1_2py68")
+planet_name = "Cadbury IV"
+planet_overview = "The Cadbury Whales are reclusive and drive a hard bargin- but are masters of certain low tech sonic crafts."
+population = 5
+technology_level = 0
+resource_richness = 2
+primary_color = Color(0.196554, 0.25394, 0.71779, 1)
+secondary_color = Color(0.619608, 0.4, 0.827451, 1)
+cloud_color = Color(1, 1, 1, 1)
+primary_secondary_balance = 0.9
+metadata/_custom_type_script = "uid://bbx74ewv1fq14"

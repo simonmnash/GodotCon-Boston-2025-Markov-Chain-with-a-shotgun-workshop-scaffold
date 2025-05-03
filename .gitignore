@@ -1,0 +1,13 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# API keys
+*.api_key
+api_key.txt
+.env
+
+# Godot UID files
+*.uid
+*.import
+api_docs/
