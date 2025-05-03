@@ -9,7 +9,7 @@ var loading = false
 func travel_to_new_planet():
 	if not loading:
 		loading = true
-		var r = LanguageModelRequest.new()
+		var r = LocalLanguageModelRequest.new()
 		r.add_context('Invent a new planet. The user will provide a vauge overview, and you will invent something new that fits in with the universe. Avoid general or vague descriptions.')
 		r.add_context('Your output should be an instance of a JSON object following the schema below')
 		r.add_context(JSON.stringify(generation_target.get_planet_schema()))
@@ -18,14 +18,7 @@ func travel_to_new_planet():
 			r.add_context("Existing Planet: " + p.planet_name + "-" + p.planet_overview)
 		r.add_context('Generate a new planet. Limit description to bare bones geography and ecosystem. Be very intentional about the name of the planet.', "user")
 		r.temperature = 1.0
-		r.response_format = {
-		  "type": "json_schema",
-		  "json_schema": {
-			"schema": generation_target.get_planet_schema(),
-			"name": "planet",
-			"strict": true
-		  }
-		}
+		r.response_format = generation_target.get_planet_schema()
 		%LanguageModelConnection.generate(r)
 
 func _ready() -> void:

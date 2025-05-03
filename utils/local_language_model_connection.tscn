@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bemhpbxym7xvl"]
+
+[ext_resource type="Script" uid="uid://c3711emyqdkm6" path="res://utils/local_language_model_connection.gd" id="1_5lgrx"]
+
+[node name="LocalLanguageModelConnection" type="Node"]
+script = ExtResource("1_5lgrx")

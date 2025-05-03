@@ -1,6 +1,12 @@
 # Markov Chain with a Shotgun
 ## Language Models, ProcGen, and Godot
 
+
+## Setup
+
+This workshop is on how to use open weight language models in procgen contexts.
+This can be done through 
+
 ## API Key Setup
 
 1. Create a file named `api_key.txt` in the `utils/` directory

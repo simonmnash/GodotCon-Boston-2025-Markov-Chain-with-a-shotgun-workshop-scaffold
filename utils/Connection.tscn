@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://brb4qolpn34o8"]
+
+[ext_resource type="Script" uid="uid://c3xrif5a81ydg" path="res://utils/connection.gd" id="1_6xf1c"]
+[ext_resource type="PackedScene" uid="uid://cooulyuwrp8nc" path="res://utils/language_model_connection.tscn" id="2_apj8c"]
+[ext_resource type="PackedScene" uid="uid://bemhpbxym7xvl" path="res://utils/local_language_model_connection.tscn" id="3_ml3oi"]
+
+[node name="ConnectionManager" type="Node"]
+script = ExtResource("1_6xf1c")
+
+[node name="RemoteLanguageModelConnection" parent="." instance=ExtResource("2_apj8c")]
+
+[node name="LocalLanguageModelConnection" parent="." instance=ExtResource("3_ml3oi")]
+
+[connection signal="request_completed" from="RemoteLanguageModelConnection" to="." method="_on_remote_language_model_connection_request_completed"]
+[connection signal="request_failed" from="RemoteLanguageModelConnection" to="." method="_on_remote_language_model_connection_request_failed"]
+[connection signal="request_completed" from="LocalLanguageModelConnection" to="." method="_on_local_language_model_connection_request_completed"]
+[connection signal="request_failed" from="LocalLanguageModelConnection" to="." method="_on_local_language_model_connection_request_failed"]

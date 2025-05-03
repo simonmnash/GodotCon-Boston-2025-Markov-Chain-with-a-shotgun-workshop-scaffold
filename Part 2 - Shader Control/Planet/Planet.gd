@@ -20,8 +20,8 @@ const PROPERTY_DESCRIPTIONS := {
 	"technology_level": "A number between 0 and 5 describing the scale of technology available to the population of the planet.",
 	"resource_richness": "A number between 0 and 10 describing the value of the resources available on the planet.",
 	"primary_color": "Primary surface color in hex format (e.g. #0080FF)",
-	"secondary_color": "Secondary surface color in hex format",
-	"cloud_color": "Cloud color in hex format",
+	"secondary_color": "Secondary surface color in hex format (e.g. #0080FF)",
+	"cloud_color": "Cloud color in hex format (e.g. #0080FF)",
 	"primary_secondary_balance": "Number between 0.5 (half primary) and 1.0 (all primary)"
 }
 
