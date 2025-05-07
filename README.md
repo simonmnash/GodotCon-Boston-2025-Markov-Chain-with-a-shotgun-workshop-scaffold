@@ -1,6 +1,8 @@
 # Markov Chain with a Shotgun
 ## GodotCon Boston 2025 Workshop Scaffolding
 
+## Note - Currently working on cleaning this up and publishing as the GodotLM plugin (https://github.com/simonmnash/GodoLM).
+
 This repo contains scaffolding for a GodotCon Boston workshop on how to reliably use small and open language models as components in larger procedural generation pipelines and game systems.
 
 ## Setup
